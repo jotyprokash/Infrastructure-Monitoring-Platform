@@ -1,0 +1,119 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - prometheus:9090
+
+  - job_name: alertmanager
+    static_configs:
+      - targets:
+          - alertmanager:9093
+
+  - job_name: blackbox-exporter
+    static_configs:
+      - targets:
+          - blackbox-exporter:9115
+
+  - job_name: proxmox-exporter
+    metrics_path: /pve
+    params:
+      module:
+        - default
+      cluster:
+        - "1"
+      node:
+        - "1"
+    static_configs:
+      - targets:
+          - proxmox-exporter:9221
+        labels:
+          environment: proxmox
+
+  - job_name: cadvisor-monitoring-lxc
+    static_configs:
+      - targets:
+          - cadvisor:8080
+        labels:
+          role: monitoring-lxc
+
+  - job_name: cadvisor-defectdojo-vm
+    static_configs:
+      - targets:
+          - defectdojo-vm.example.internal:8080
+        labels:
+          role: defectdojo-vm
+
+  - job_name: node-exporter-proxmox-host
+    static_configs:
+      - targets:
+          - proxmox-host.example.internal:9100
+        labels:
+          role: proxmox-host
+
+  - job_name: node-exporter-lxc
+    static_configs:
+      - targets:
+          - lxc-100.example.internal:9100
+          - lxc-101.example.internal:9100
+        labels:
+          role: lxc
+
+  - job_name: node-exporter-vms
+    static_configs:
+      - targets:
+          - vm-200.example.internal:9100
+          - defectdojo-vm.example.internal:9100
+        labels:
+          role: vm
+
+  - job_name: blackbox-http-domains
+    metrics_path: /probe
+    params:
+      module:
+        - http_2xx
+    static_configs:
+      - targets:
+          - https://on-prem.jatritech.com
+          - https://aspm.jatritech.com
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  - job_name: blackbox-tunnel-endpoints
+    metrics_path: /probe
+    params:
+      module:
+        - http_2xx
+    static_configs:
+      - targets:
+          - https://on-prem.jatritech.com
+          - https://aspm.jatritech.com
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
