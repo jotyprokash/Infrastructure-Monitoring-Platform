@@ -1,0 +1,94 @@
+groups:
+  - name: availability
+    rules:
+      - alert: HostDown
+        expr: up{job="node-exporter-proxmox-host"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Proxmox host down"
+          description: "{{ $labels.instance }} has not responded for 2 minutes."
+
+      - alert: VMDown
+        expr: up{job="node-exporter-vms"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "VM down"
+          description: "{{ $labels.instance }} has not responded for 2 minutes."
+
+      - alert: LXCDown
+        expr: up{job="node-exporter-lxc"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "LXC down"
+          description: "{{ $labels.instance }} has not responded for 2 minutes."
+
+      - alert: DockerContainerDown
+        expr: (time() - container_last_seen{job=~"cadvisor-.*", name!=""}) > 60
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Docker container down"
+          description: "{{ $labels.name }} on {{ $labels.instance }} has not been seen for more than 60 seconds."
+
+      - alert: DomainDown
+        expr: probe_success{job="blackbox-http-domains"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Domain down"
+          description: "{{ $labels.instance }} failed HTTP health checks."
+
+      - alert: TunnelEndpointDown
+        expr: probe_success{job="blackbox-tunnel-endpoints"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Tunnel endpoint down"
+          description: "{{ $labels.instance }} failed tunnel endpoint health checks."
+
+  - name: resource-usage
+    rules:
+      - alert: CPUUsageHigh
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU usage above 90%"
+          description: "{{ $labels.instance }} CPU usage is above 90%."
+
+      - alert: RAMUsageHigh
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "RAM usage above 85%"
+          description: "{{ $labels.instance }} RAM usage is above 85%."
+
+      - alert: DiskUsageHigh
+        expr: (1 - (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay|squashfs|ramfs"} / node_filesystem_size_bytes{fstype!~"tmpfs|overlay|squashfs|ramfs"})) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disk usage above 80%"
+          description: "{{ $labels.instance }} disk usage on {{ $labels.mountpoint }} is above 80%."
+
+      - alert: SSLExpirySoon
+        expr: (probe_ssl_earliest_cert_expiry{job=~"blackbox-http-domains|blackbox-tunnel-endpoints"} - time()) / 86400 < 15
+        for: 1h
+        labels:
+          severity: warning
+        annotations:
+          summary: "SSL certificate expires in less than 15 days"
+          description: "{{ $labels.instance }} SSL certificate expires in less than 15 days."
