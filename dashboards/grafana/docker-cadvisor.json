@@ -1,0 +1,25 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {
+      "datasource": {"type": "prometheus", "uid": "Prometheus"},
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"content": "Docker / cAdvisor dashboard placeholder. Import-ready reference: Grafana.com dashboard ID 14282.", "mode": "markdown"},
+      "pluginVersion": "12.0.0",
+      "title": "Docker / cAdvisor",
+      "type": "text"
+    }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 41,
+  "tags": ["docker", "cadvisor"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "title": "Docker / cAdvisor",
+  "uid": "docker-cadvisor",
+  "version": 1
+}
+

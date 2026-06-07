@@ -1,0 +1,25 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {
+      "datasource": {"type": "prometheus", "uid": "Prometheus"},
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"content": "Linux Node Exporter dashboard placeholder. Import-ready reference: Grafana.com dashboard ID 1860.", "mode": "markdown"},
+      "pluginVersion": "12.0.0",
+      "title": "Linux Node Exporter",
+      "type": "text"
+    }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 41,
+  "tags": ["linux", "node-exporter"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "title": "Linux Node Exporter",
+  "uid": "linux-node-exporter",
+  "version": 1
+}
+

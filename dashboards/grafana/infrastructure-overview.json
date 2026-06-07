@@ -1,0 +1,45 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {
+      "datasource": {"type": "prometheus", "uid": "Prometheus"},
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 4, "w": 8, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"reduceOptions": {"values": false, "calcs": ["lastNotNull"], "fields": ""}, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"expr": "sum(up)", "refId": "A"}],
+      "title": "Targets Up",
+      "type": "gauge"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "Prometheus"},
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 4, "w": 8, "x": 8, "y": 0},
+      "id": 2,
+      "options": {"reduceOptions": {"values": false, "calcs": ["lastNotNull"], "fields": ""}, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"expr": "sum(probe_success{job=~\"blackbox-http-domains|blackbox-tunnel-endpoints\"})", "refId": "A"}],
+      "title": "HTTP Checks Passing",
+      "type": "gauge"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "Prometheus"},
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 4, "w": 8, "x": 16, "y": 0},
+      "id": 3,
+      "options": {"reduceOptions": {"values": false, "calcs": ["lastNotNull"], "fields": ""}, "orientation": "auto", "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"expr": "count(ALERTS{alertstate=\"firing\"})", "refId": "A"}],
+      "title": "Firing Alerts",
+      "type": "gauge"
+    }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 41,
+  "tags": ["overview"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "title": "Infrastructure Overview",
+  "uid": "infrastructure-overview",
+  "version": 1
+}
+
