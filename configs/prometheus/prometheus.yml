@@ -50,34 +50,24 @@ scrape_configs:
           role: monitoring-lxc
 
   - job_name: cadvisor-defectdojo-vm
-    static_configs:
-      - targets:
-          - defectdojo-vm.example.internal:8080
-        labels:
-          role: defectdojo-vm
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/targets/cadvisor-defectdojo-vm.yml
 
   - job_name: node-exporter-proxmox-host
-    static_configs:
-      - targets:
-          - proxmox-host.example.internal:9100
-        labels:
-          role: proxmox-host
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/targets/node-exporter-proxmox-host.yml
 
   - job_name: node-exporter-lxc
-    static_configs:
-      - targets:
-          - lxc-100.example.internal:9100
-          - lxc-101.example.internal:9100
-        labels:
-          role: lxc
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/targets/node-exporter-lxc.yml
 
   - job_name: node-exporter-vms
-    static_configs:
-      - targets:
-          - vm-200.example.internal:9100
-          - defectdojo-vm.example.internal:9100
-        labels:
-          role: vm
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/targets/node-exporter-vms.yml
 
   - job_name: blackbox-http-domains
     metrics_path: /probe
@@ -116,4 +106,3 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: blackbox-exporter:9115
-

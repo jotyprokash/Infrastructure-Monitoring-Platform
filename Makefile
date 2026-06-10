@@ -1,6 +1,6 @@
 COMPOSE=docker compose
 
-.PHONY: bootstrap init deploy up down restart pull logs ps validate verify autostart-status reload-prometheus reload-alertmanager clean
+.PHONY: bootstrap init deploy up down restart pull logs ps validate verify autostart-status reload-prometheus reload-alertmanager clean agent-node agent-cadvisor
 
 bootstrap:
 	./scripts/bootstrap-ubuntu.sh
@@ -46,6 +46,12 @@ autostart-status:
 	systemctl is-enabled docker
 	systemctl is-active docker
 	$(COMPOSE) ps
+
+agent-node:
+	./scripts/install-node-exporter.sh
+
+agent-cadvisor:
+	./scripts/install-cadvisor-agent.sh
 
 reload-prometheus:
 	curl -fsS -X POST http://localhost:$${PROMETHEUS_HTTP_PORT:-9090}/-/reload

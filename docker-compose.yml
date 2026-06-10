@@ -18,6 +18,7 @@ services:
     volumes:
       - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ./configs/prometheus/rules:/etc/prometheus/rules:ro
+      - ./configs/prometheus/targets:/etc/prometheus/targets:ro
       - prometheus-data:/prometheus
     depends_on:
       - alertmanager

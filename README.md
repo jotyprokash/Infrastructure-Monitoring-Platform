@@ -81,3 +81,24 @@ cAdvisor: localhost only
 make verify
 make autostart-status
 ```
+
+## Agent Onboarding
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/<owner>/<repo>/main/scripts/install-node-exporter.sh
+chmod +x install-node-exporter.sh
+sudo ./install-node-exporter.sh
+```
+
+```bash
+curl -fsSLO https://raw.githubusercontent.com/<owner>/<repo>/main/scripts/install-cadvisor-agent.sh
+chmod +x install-cadvisor-agent.sh
+sudo ./install-cadvisor-agent.sh
+```
+
+```bash
+./scripts/register-target.sh node-exporter-proxmox-host 192.168.1.2:9100 proxmox-host pve01
+./scripts/register-target.sh node-exporter-lxc 192.168.1.30:9100 lxc lxc-30
+./scripts/register-target.sh node-exporter-vms 192.168.1.40:9100 vm defectdojo
+./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.40:8080 defectdojo-vm defectdojo
+```
