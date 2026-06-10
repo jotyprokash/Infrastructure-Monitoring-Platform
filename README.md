@@ -85,15 +85,19 @@ make autostart-status
 ## Agent Onboarding
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/<owner>/<repo>/main/scripts/install-node-exporter.sh
+curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-node-exporter.sh
 chmod +x install-node-exporter.sh
 sudo ./install-node-exporter.sh
 ```
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/<owner>/<repo>/main/scripts/install-cadvisor-agent.sh
+curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-cadvisor-agent.sh
 chmod +x install-cadvisor-agent.sh
 sudo ./install-cadvisor-agent.sh
+```
+
+```text
+./scripts/register-target.sh <job> <ip:port> <role> <name>
 ```
 
 ```bash
