@@ -64,13 +64,16 @@ install_docker_repo() {
 install_docker() {
   if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
     log "Docker and Docker Compose plugin already installed."
-    return
+  else
+    install_docker_repo
+    log "Installing Docker Engine and Compose plugin."
+    run_as_root apt-get update
+    run_as_root apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   fi
 
-  install_docker_repo
-  log "Installing Docker Engine and Compose plugin."
-  run_as_root apt-get update
-  run_as_root apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  log "Enabling Docker services at boot."
+  run_as_root systemctl enable --now containerd
+  run_as_root systemctl enable --now docker
 }
 
 configure_user() {

@@ -79,4 +79,5 @@ cAdvisor: localhost only
 
 ```bash
 make verify
+make autostart-status
 ```

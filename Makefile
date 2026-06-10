@@ -1,6 +1,6 @@
 COMPOSE=docker compose
 
-.PHONY: bootstrap init deploy up down restart pull logs ps validate verify reload-prometheus reload-alertmanager clean
+.PHONY: bootstrap init deploy up down restart pull logs ps validate verify autostart-status reload-prometheus reload-alertmanager clean
 
 bootstrap:
 	./scripts/bootstrap-ubuntu.sh
@@ -41,6 +41,11 @@ verify:
 	curl -fsS http://localhost:$${GRAFANA_HTTP_PORT:-3000}/api/health
 	curl -fsS "http://localhost:$${PROMETHEUS_HTTP_PORT:-9090}/api/v1/targets"
 	curl -fsS "http://localhost:$${PROMETHEUS_HTTP_PORT:-9090}/api/v1/rules"
+
+autostart-status:
+	systemctl is-enabled docker
+	systemctl is-active docker
+	$(COMPOSE) ps
 
 reload-prometheus:
 	curl -fsS -X POST http://localhost:$${PROMETHEUS_HTTP_PORT:-9090}/-/reload
