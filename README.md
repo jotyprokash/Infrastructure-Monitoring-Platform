@@ -30,8 +30,10 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 │   │   └── blackbox.yml
 │   ├── prometheus
 │   │   ├── prometheus.yml
-│   │   └── rules
+│   │   ├── rules
 │   │       └── alerts.yml
+│   │   └── targets
+│   │       └── proxmox-exporter.yml
 │   └── proxmox-exporter
 │       └── pve.yml.example
 ├── dashboards
@@ -86,7 +88,7 @@ make autostart-status
 
 ```bash
 ./scripts/configure-proxmox-exporter.sh 192.168.1.1 prometheus@pve monitoring 'TOKEN_SECRET' false
-docker compose restart proxmox-exporter prometheus
+docker compose up -d --force-recreate proxmox-exporter prometheus
 ```
 
 ## Agent Onboarding

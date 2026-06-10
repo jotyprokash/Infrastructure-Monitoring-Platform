@@ -17,6 +17,7 @@ TOKEN_NAME="${3:-}"
 TOKEN_VALUE="${4:-}"
 VERIFY_SSL="${5:-false}"
 CONFIG_FILE="configs/proxmox-exporter/pve.yml"
+TARGET_FILE="configs/prometheus/targets/proxmox-exporter.yml"
 
 if [ -z "$PVE_HOST" ] || [ -z "$USER_NAME" ] || [ -z "$TOKEN_NAME" ] || [ -z "$TOKEN_VALUE" ]; then
   usage
@@ -32,7 +33,6 @@ mkdir -p "$(dirname "$CONFIG_FILE")"
 
 cat > "$CONFIG_FILE" <<EOF
 default:
-  host: ${PVE_HOST}
   user: ${USER_NAME}
   token_name: ${TOKEN_NAME}
   token_value: ${TOKEN_VALUE}
@@ -41,5 +41,16 @@ EOF
 
 chmod 644 "$CONFIG_FILE"
 
+mkdir -p "$(dirname "$TARGET_FILE")"
+cat > "$TARGET_FILE" <<EOF
+- targets:
+  - ${PVE_HOST}
+  labels:
+    environment: proxmox
+    role: proxmox-host
+    name: ${PVE_HOST}
+EOF
+
 printf 'Wrote %s\n' "$CONFIG_FILE"
-printf 'Restart with: docker compose restart proxmox-exporter prometheus\n'
+printf 'Wrote %s\n' "$TARGET_FILE"
+printf 'Restart with: docker compose up -d --force-recreate proxmox-exporter prometheus\n'
