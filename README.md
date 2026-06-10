@@ -64,6 +64,17 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 make deploy
 ```
 
+## Access Policy
+
+```text
+Grafana: LAN-facing by default
+Prometheus: localhost only
+Alertmanager: localhost only
+Blackbox Exporter: localhost only
+Proxmox Exporter: localhost only
+cAdvisor: localhost only
+```
+
 ## Verification Commands
 
 ```bash
