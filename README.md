@@ -1,15 +1,14 @@
 <p align="center">
-  <img alt="Proxmox VE 9" src="https://img.shields.io/badge/Proxmox-VE_9-E57000?style=for-the-badge&logo=proxmox&logoColor=white">
-  <img alt="Ubuntu 24.04 LXC" src="https://img.shields.io/badge/Ubuntu-24.04_LXC-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
-  <img alt="Docker" src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white">
-  <img alt="Grafana" src="https://img.shields.io/badge/Grafana-Provisioned-F46800?style=for-the-badge&logo=grafana&logoColor=white">
-  <img alt="Prometheus" src="https://img.shields.io/badge/Prometheus-15s_Scrape-E6522C?style=for-the-badge&logo=prometheus&logoColor=white">
-  <img alt="Alertmanager" src="https://img.shields.io/badge/Alertmanager-Ruleset-E6522C?style=for-the-badge&logo=prometheus&logoColor=white">
-  <img alt="Blackbox Exporter" src="https://img.shields.io/badge/Blackbox-HTTP_SSL_Checks-111827?style=for-the-badge&logo=prometheus&logoColor=white">
-  <img alt="cAdvisor" src="https://img.shields.io/badge/cAdvisor-Container_Metrics-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white">
-  <img alt="Infrastructure as Code" src="https://img.shields.io/badge/IaC-GitHub_Ready-181717?style=for-the-badge&logo=github&logoColor=white">
-  <img alt="Self hosted" src="https://img.shields.io/badge/Self--Hosted-Observability-0F766E?style=for-the-badge">
-  <img alt="Retention" src="https://img.shields.io/badge/Retention-15_Days-64748B?style=for-the-badge">
+  <img alt="Proxmox VE 9" src="https://img.shields.io/badge/Proxmox-VE_9-E57000?logo=proxmox&logoColor=white">
+  <img alt="Ubuntu 24.04 LXC" src="https://img.shields.io/badge/Ubuntu-24.04_LXC-E95420?logo=ubuntu&logoColor=white">
+  <img alt="Docker Compose" src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white">
+  <img alt="Grafana" src="https://img.shields.io/badge/Grafana-Provisioned-F46800?logo=grafana&logoColor=white">
+  <img alt="Prometheus" src="https://img.shields.io/badge/Prometheus-15s-E6522C?logo=prometheus&logoColor=white">
+  <img alt="Alertmanager" src="https://img.shields.io/badge/Alertmanager-Alerts-E6522C?logo=prometheus&logoColor=white">
+  <img alt="Blackbox Exporter" src="https://img.shields.io/badge/Blackbox-HTTP%2FSSL-111827?logo=prometheus&logoColor=white">
+  <img alt="cAdvisor" src="https://img.shields.io/badge/cAdvisor-Containers-326CE5?logo=kubernetes&logoColor=white">
+  <img alt="IaC" src="https://img.shields.io/badge/IaC-Ready-181717?logo=github&logoColor=white">
+  <img alt="Retention" src="https://img.shields.io/badge/Retention-15d-64748B">
 </p>
 
 # Proxmox Monitoring Stack
