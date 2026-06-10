@@ -1,6 +1,6 @@
 default:
+  host: 192.168.1.1
   user: prometheus@pve
   token_name: monitoring
   token_value: change-me
   verify_ssl: false
-

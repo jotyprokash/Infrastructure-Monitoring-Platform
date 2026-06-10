@@ -85,7 +85,7 @@ make autostart-status
 ## Proxmox Exporter
 
 ```bash
-./scripts/configure-proxmox-exporter.sh prometheus@pve monitoring 'TOKEN_SECRET' false
+./scripts/configure-proxmox-exporter.sh 192.168.1.1 prometheus@pve monitoring 'TOKEN_SECRET' false
 docker compose restart proxmox-exporter prometheus
 ```
 

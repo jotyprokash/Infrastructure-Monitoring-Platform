@@ -4,20 +4,21 @@ set -Eeuo pipefail
 usage() {
   cat <<'EOF'
 Usage:
-  ./scripts/configure-proxmox-exporter.sh <user> <token_name> <token_value> [verify_ssl]
+  ./scripts/configure-proxmox-exporter.sh <host> <user> <token_name> <token_value> [verify_ssl]
 
 Example:
-  ./scripts/configure-proxmox-exporter.sh prometheus@pve monitoring 'TOKEN_SECRET' false
+  ./scripts/configure-proxmox-exporter.sh 192.168.1.1 prometheus@pve monitoring 'TOKEN_SECRET' false
 EOF
 }
 
-USER_NAME="${1:-}"
-TOKEN_NAME="${2:-}"
-TOKEN_VALUE="${3:-}"
-VERIFY_SSL="${4:-false}"
+PVE_HOST="${1:-}"
+USER_NAME="${2:-}"
+TOKEN_NAME="${3:-}"
+TOKEN_VALUE="${4:-}"
+VERIFY_SSL="${5:-false}"
 CONFIG_FILE="configs/proxmox-exporter/pve.yml"
 
-if [ -z "$USER_NAME" ] || [ -z "$TOKEN_NAME" ] || [ -z "$TOKEN_VALUE" ]; then
+if [ -z "$PVE_HOST" ] || [ -z "$USER_NAME" ] || [ -z "$TOKEN_NAME" ] || [ -z "$TOKEN_VALUE" ]; then
   usage
   exit 1
 fi
@@ -31,6 +32,7 @@ mkdir -p "$(dirname "$CONFIG_FILE")"
 
 cat > "$CONFIG_FILE" <<EOF
 default:
+  host: ${PVE_HOST}
   user: ${USER_NAME}
   token_name: ${TOKEN_NAME}
   token_value: ${TOKEN_VALUE}
