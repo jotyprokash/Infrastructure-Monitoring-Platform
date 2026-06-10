@@ -1,6 +1,6 @@
 .env
+configs/proxmox-exporter/pve.yml
 data/
 *.log
 *.tmp
 .DS_Store
-

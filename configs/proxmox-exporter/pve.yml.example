@@ -2,5 +2,5 @@ default:
   user: prometheus@pve
   token_name: monitoring
   token_value: change-me
-  verify_ssl: true
+  verify_ssl: false
 

@@ -33,7 +33,7 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 │   │   └── rules
 │   │       └── alerts.yml
 │   └── proxmox-exporter
-│       └── pve.yml
+│       └── pve.yml.example
 ├── dashboards
 │   └── grafana
 │       ├── blackbox-exporter.json
@@ -80,6 +80,13 @@ cAdvisor: localhost only
 ```bash
 make verify
 make autostart-status
+```
+
+## Proxmox Exporter
+
+```bash
+./scripts/configure-proxmox-exporter.sh prometheus@pve monitoring 'TOKEN_SECRET' false
+docker compose restart proxmox-exporter prometheus
 ```
 
 ## Agent Onboarding

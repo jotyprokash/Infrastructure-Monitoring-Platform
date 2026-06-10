@@ -7,6 +7,7 @@ bootstrap:
 
 init:
 	test -f .env || cp .env.example .env
+	test -f configs/proxmox-exporter/pve.yml || cp configs/proxmox-exporter/pve.yml.example configs/proxmox-exporter/pve.yml
 
 deploy: init validate pull up ps
 
