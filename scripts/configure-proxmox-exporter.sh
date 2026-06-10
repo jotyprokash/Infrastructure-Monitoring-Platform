@@ -37,8 +37,7 @@ default:
   verify_ssl: ${VERIFY_SSL}
 EOF
 
-chmod 600 "$CONFIG_FILE"
+chmod 644 "$CONFIG_FILE"
 
 printf 'Wrote %s\n' "$CONFIG_FILE"
 printf 'Restart with: docker compose restart proxmox-exporter prometheus\n'
-
