@@ -38,7 +38,7 @@ run_as_root() {
 install_base_packages() {
   log "Installing base packages."
   run_as_root apt-get update
-  run_as_root apt-get install -y ca-certificates curl gnupg make
+  run_as_root apt-get install -y ca-certificates curl git gnupg make sudo
 }
 
 install_docker_repo() {
@@ -105,4 +105,3 @@ main() {
 }
 
 main "$@"
-

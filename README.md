@@ -55,8 +55,7 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 ## Setup Commands
 
 ```bash
-chmod +x scripts/bootstrap-ubuntu.sh
-make bootstrap
+./scripts/bootstrap-ubuntu.sh
 ```
 
 ## Deployment Commands
