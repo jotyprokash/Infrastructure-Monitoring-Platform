@@ -115,4 +115,5 @@ On the monitoring server:
 cp -n inventory/agents.yml.example inventory/agents.yml
 make onboard-agent
 make verify
+curl -G http://localhost:9090/api/v1/query --data-urlencode 'query=up{name="<agent-name>"}'
 ```

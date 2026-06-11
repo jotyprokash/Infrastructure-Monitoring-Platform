@@ -7,7 +7,7 @@
       "fieldConfig": {"defaults": {}, "overrides": []},
       "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
       "id": 1,
-      "options": {"content": "Blackbox Exporter dashboard placeholder. Import-ready reference: Grafana.com dashboard ID 7587.", "mode": "markdown"},
+      "options": {"content": "Blackbox Exporter import reference: Grafana.com dashboard ID 7587.", "mode": "markdown"},
       "pluginVersion": "12.0.0",
       "title": "Blackbox Exporter",
       "type": "text"
@@ -22,4 +22,3 @@
   "uid": "blackbox-exporter",
   "version": 1
 }
-

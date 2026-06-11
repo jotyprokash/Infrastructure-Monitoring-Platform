@@ -7,7 +7,7 @@
       "fieldConfig": {"defaults": {}, "overrides": []},
       "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
       "id": 1,
-      "options": {"content": "Linux Node Exporter dashboard placeholder. Import-ready reference: Grafana.com dashboard ID 1860.", "mode": "markdown"},
+      "options": {"content": "Linux Node Exporter import reference: Grafana.com dashboard ID 1860.", "mode": "markdown"},
       "pluginVersion": "12.0.0",
       "title": "Linux Node Exporter",
       "type": "text"
@@ -22,4 +22,3 @@
   "uid": "linux-node-exporter",
   "version": 1
 }
-

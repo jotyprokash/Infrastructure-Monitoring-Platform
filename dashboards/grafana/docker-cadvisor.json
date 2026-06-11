@@ -7,7 +7,7 @@
       "fieldConfig": {"defaults": {}, "overrides": []},
       "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
       "id": 1,
-      "options": {"content": "Docker / cAdvisor dashboard placeholder. Import-ready reference: Grafana.com dashboard ID 14282.", "mode": "markdown"},
+      "options": {"content": "Docker / cAdvisor import reference: Grafana.com dashboard ID 14282.", "mode": "markdown"},
       "pluginVersion": "12.0.0",
       "title": "Docker / cAdvisor",
       "type": "text"
@@ -22,4 +22,3 @@
   "uid": "docker-cadvisor",
   "version": 1
 }
-

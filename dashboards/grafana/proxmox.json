@@ -7,7 +7,7 @@
       "fieldConfig": {"defaults": {}, "overrides": []},
       "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
       "id": 1,
-      "options": {"content": "Proxmox dashboard placeholder. Import-ready reference: Grafana.com dashboard ID 10347.", "mode": "markdown"},
+      "options": {"content": "Proxmox import reference: Grafana.com dashboard ID 10347.", "mode": "markdown"},
       "pluginVersion": "12.0.0",
       "title": "Proxmox",
       "type": "text"
@@ -22,4 +22,3 @@
   "uid": "proxmox",
   "version": 1
 }
-

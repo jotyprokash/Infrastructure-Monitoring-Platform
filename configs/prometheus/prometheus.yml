@@ -79,8 +79,8 @@ scrape_configs:
         - http_2xx
     static_configs:
       - targets:
-          - https://on-prem.jatritech.com
-          - https://aspm.jatritech.com
+          - https://monitoring.example.com
+          - https://app.example.com
     relabel_configs:
       - source_labels:
           - __address__
@@ -98,8 +98,8 @@ scrape_configs:
         - http_2xx
     static_configs:
       - targets:
-          - https://on-prem.jatritech.com
-          - https://aspm.jatritech.com
+          - https://monitoring.example.com
+          - https://app.example.com
     relabel_configs:
       - source_labels:
           - __address__
