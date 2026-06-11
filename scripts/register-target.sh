@@ -10,13 +10,13 @@ Jobs:
   node-exporter-proxmox-host
   node-exporter-lxc
   node-exporter-vms
-  cadvisor-defectdojo-vm
+  cadvisor-docker
 
 Examples:
   ./scripts/register-target.sh node-exporter-proxmox-host 192.168.1.2:9100 proxmox-host pve01
-  ./scripts/register-target.sh node-exporter-lxc 192.168.1.30:9100 lxc monitoring
-  ./scripts/register-target.sh node-exporter-vms 192.168.1.40:9100 vm defectdojo
-  ./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.40:8080 defectdojo-vm defectdojo
+  ./scripts/register-target.sh node-exporter-lxc 192.168.1.30:9100 lxc lxc-01
+  ./scripts/register-target.sh node-exporter-vms 192.168.1.40:9100 vm app-vm-01
+  ./scripts/register-target.sh cadvisor-docker 192.168.1.40:8080 docker app-vm-01
 EOF
 }
 
@@ -31,7 +31,7 @@ if [ -z "$JOB" ] || [ -z "$TARGET" ] || [ -z "$ROLE" ]; then
 fi
 
 case "$JOB" in
-  node-exporter-proxmox-host|node-exporter-lxc|node-exporter-vms|cadvisor-defectdojo-vm) ;;
+  node-exporter-proxmox-host|node-exporter-lxc|node-exporter-vms|cadvisor-docker) ;;
   *) printf 'Unsupported job: %s\n' "$JOB" >&2; usage; exit 1 ;;
 esac
 

@@ -1,5 +1,8 @@
 .env
 configs/proxmox-exporter/pve.yml
+inventory/agents.yml
+configs/prometheus/targets/*.yml
+!configs/prometheus/targets/.gitkeep
 data/
 *.log
 *.tmp

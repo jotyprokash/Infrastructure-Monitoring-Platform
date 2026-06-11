@@ -33,7 +33,7 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 │   │   ├── rules
 │   │       └── alerts.yml
 │   │   └── targets
-│   │       └── proxmox-exporter.yml
+│   │       └── .gitkeep
 │   └── proxmox-exporter
 │       └── pve.yml.example
 ├── dashboards
@@ -93,65 +93,36 @@ docker compose up -d --force-recreate proxmox-exporter prometheus
 
 ## Agent Onboarding
 
-Run Node Exporter on every Linux host, VM, or LXC that should expose system metrics.
-
 On the agent machine:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-node-exporter.sh
-chmod +x install-node-exporter.sh
-sudo ./install-node-exporter.sh
+curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-agent.sh
+chmod +x install-agent.sh
+sudo INSTALL_NODE_EXPORTER=true INSTALL_CADVISOR=false ./install-agent.sh
 ```
 
-Run cAdvisor only on machines that run Docker containers.
-
-On the Docker agent machine:
+On a Docker agent machine:
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-cadvisor-agent.sh
-chmod +x install-cadvisor-agent.sh
-sudo ./install-cadvisor-agent.sh
-```
-
-If port `8080` is already used on the Docker agent machine:
-
-```bash
-sudo CADVISOR_PORT=8081 ./install-cadvisor-agent.sh
+sudo INSTALL_NODE_EXPORTER=true INSTALL_CADVISOR=true CADVISOR_PORT=8081 ./install-agent.sh
 ```
 
 On the monitoring server:
 
-```text
-./scripts/register-target.sh <job> <ip:port> <role> <name>
+```bash
+cp -n inventory/agents.yml.example inventory/agents.yml
+make onboard-agent
+make verify
 ```
 
-Register a Proxmox host Node Exporter target:
+Non-interactive onboarding:
 
 ```bash
-./scripts/register-target.sh node-exporter-proxmox-host 192.168.1.2:9100 proxmox-host pve01
+./scripts/onboard-agent.sh --name app-vm-01 --address 192.168.1.100 --type vm --node-exporter true --cadvisor true --cadvisor-port 8081
 ```
 
-Register an LXC Node Exporter target:
+Sync existing inventory:
 
 ```bash
-./scripts/register-target.sh node-exporter-lxc 192.168.1.30:9100 lxc lxc-30
-```
-
-Register a VM Node Exporter target:
-
-```bash
-./scripts/register-target.sh node-exporter-vms 192.168.1.40:9100 vm defectdojo
-```
-
-Register a Docker/cAdvisor target:
-
-```bash
-./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.40:8081 defectdojo-vm defectdojo
-```
-
-DefectDojo example:
-
-```bash
-./scripts/register-target.sh node-exporter-vms 192.168.1.170:9100 vm defectdojo
-./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.170:8081 defectdojo-vm defectdojo
+make sync-agents
 ```

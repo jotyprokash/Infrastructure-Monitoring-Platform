@@ -1,6 +1,12 @@
 COMPOSE=docker compose
+TARGET_FILES=\
+	configs/prometheus/targets/proxmox-exporter.yml \
+	configs/prometheus/targets/node-exporter-proxmox-host.yml \
+	configs/prometheus/targets/node-exporter-lxc.yml \
+	configs/prometheus/targets/node-exporter-vms.yml \
+	configs/prometheus/targets/cadvisor-docker.yml
 
-.PHONY: bootstrap init deploy up down restart pull logs ps validate verify autostart-status reload-prometheus reload-alertmanager clean agent-node agent-cadvisor
+.PHONY: bootstrap init deploy up down restart pull logs ps validate verify autostart-status reload-prometheus reload-alertmanager clean agent-node agent-cadvisor onboard-agent sync-agents
 
 bootstrap:
 	./scripts/bootstrap-ubuntu.sh
@@ -8,6 +14,8 @@ bootstrap:
 init:
 	test -f .env || cp .env.example .env
 	test -f configs/proxmox-exporter/pve.yml || cp configs/proxmox-exporter/pve.yml.example configs/proxmox-exporter/pve.yml
+	mkdir -p configs/prometheus/targets inventory
+	for file in $(TARGET_FILES); do test -f $$file || printf '[]\n' > $$file; done
 
 deploy: init validate pull up ps
 
@@ -53,6 +61,12 @@ agent-node:
 
 agent-cadvisor:
 	./scripts/install-cadvisor-agent.sh
+
+onboard-agent: init
+	./scripts/onboard-agent.sh
+
+sync-agents: init
+	./scripts/sync-agent-targets.sh
 
 reload-prometheus:
 	curl -fsS -X POST http://localhost:$${PROMETHEUS_HTTP_PORT:-9090}/-/reload

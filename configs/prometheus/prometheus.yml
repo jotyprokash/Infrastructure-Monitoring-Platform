@@ -52,10 +52,10 @@ scrape_configs:
         labels:
           role: monitoring-lxc
 
-  - job_name: cadvisor-defectdojo-vm
+  - job_name: cadvisor-docker
     file_sd_configs:
       - files:
-          - /etc/prometheus/targets/cadvisor-defectdojo-vm.yml
+          - /etc/prometheus/targets/cadvisor-docker.yml
 
   - job_name: node-exporter-proxmox-host
     file_sd_configs:

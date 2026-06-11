@@ -1,0 +1,21 @@
+agents:
+  - name: app-vm-01
+    address: 192.168.1.100
+    type: vm
+    node_exporter: true
+    cadvisor: true
+    cadvisor_port: 8081
+
+  - name: lxc-01
+    address: 192.168.1.101
+    type: lxc
+    node_exporter: true
+    cadvisor: false
+
+  - name: pve-node-01
+    address: 192.168.1.50
+    type: proxmox
+    node_exporter: false
+    cadvisor: false
+    proxmox_exporter: true
+
