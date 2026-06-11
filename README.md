@@ -93,7 +93,7 @@ docker compose up -d --force-recreate proxmox-exporter prometheus
 
 ## Agent Onboarding
 
-On the agent machine:
+On a Linux agent machine:
 
 ```bash
 curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-agent.sh
@@ -104,6 +104,8 @@ sudo INSTALL_NODE_EXPORTER=true INSTALL_CADVISOR=false ./install-agent.sh
 On a Docker agent machine:
 
 ```bash
+curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-agent.sh
+chmod +x install-agent.sh
 sudo INSTALL_NODE_EXPORTER=true INSTALL_CADVISOR=true CADVISOR_PORT=8081 ./install-agent.sh
 ```
 
@@ -113,16 +115,4 @@ On the monitoring server:
 cp -n inventory/agents.yml.example inventory/agents.yml
 make onboard-agent
 make verify
-```
-
-Non-interactive onboarding:
-
-```bash
-./scripts/onboard-agent.sh --name app-vm-01 --address 192.168.1.100 --type vm --node-exporter true --cadvisor true --cadvisor-port 8081
-```
-
-Sync existing inventory:
-
-```bash
-make sync-agents
 ```
