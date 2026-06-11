@@ -93,11 +93,19 @@ docker compose up -d --force-recreate proxmox-exporter prometheus
 
 ## Agent Onboarding
 
+Run Node Exporter on every Linux host, VM, or LXC that should expose system metrics.
+
+On the agent machine:
+
 ```bash
 curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-node-exporter.sh
 chmod +x install-node-exporter.sh
 sudo ./install-node-exporter.sh
 ```
+
+Run cAdvisor only on machines that run Docker containers.
+
+On the Docker agent machine:
 
 ```bash
 curl -fsSLO https://raw.githubusercontent.com/jotyprokash/Infrastructure-Monitoring-Platform/main/scripts/install-cadvisor-agent.sh
@@ -105,13 +113,45 @@ chmod +x install-cadvisor-agent.sh
 sudo ./install-cadvisor-agent.sh
 ```
 
+If port `8080` is already used on the Docker agent machine:
+
+```bash
+sudo CADVISOR_PORT=8081 ./install-cadvisor-agent.sh
+```
+
+On the monitoring server:
+
 ```text
 ./scripts/register-target.sh <job> <ip:port> <role> <name>
 ```
 
+Register a Proxmox host Node Exporter target:
+
 ```bash
 ./scripts/register-target.sh node-exporter-proxmox-host 192.168.1.2:9100 proxmox-host pve01
+```
+
+Register an LXC Node Exporter target:
+
+```bash
 ./scripts/register-target.sh node-exporter-lxc 192.168.1.30:9100 lxc lxc-30
+```
+
+Register a VM Node Exporter target:
+
+```bash
 ./scripts/register-target.sh node-exporter-vms 192.168.1.40:9100 vm defectdojo
-./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.40:8080 defectdojo-vm defectdojo
+```
+
+Register a Docker/cAdvisor target:
+
+```bash
+./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.40:8081 defectdojo-vm defectdojo
+```
+
+DefectDojo example:
+
+```bash
+./scripts/register-target.sh node-exporter-vms 192.168.1.170:9100 vm defectdojo
+./scripts/register-target.sh cadvisor-defectdojo-vm 192.168.1.170:8081 defectdojo-vm defectdojo
 ```
