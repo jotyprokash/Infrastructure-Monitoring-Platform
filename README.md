@@ -17,48 +17,6 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 
 ![Hybrid Infrastructure Monitoring Platform](assets/architecture/monitoring-platform.png)
 
-## Repository Tree
-
-```text
-.
-├── .env.example
-├── .gitignore
-├── Makefile
-├── README.md
-├── assets
-│   └── architecture
-│       └── monitoring-platform.png
-├── configs
-│   ├── alertmanager
-│   │   └── alertmanager.yml
-│   ├── blackbox
-│   │   └── blackbox.yml
-│   ├── prometheus
-│   │   ├── prometheus.yml
-│   │   ├── rules
-│   │       └── alerts.yml
-│   │   └── targets
-│   │       └── .gitkeep
-│   └── proxmox-exporter
-│       └── pve.yml.example
-├── dashboards
-│   └── grafana
-│       ├── blackbox-exporter.json
-│       ├── docker-cadvisor.json
-│       ├── infrastructure-overview.json
-│       ├── linux-node-exporter.json
-│       └── proxmox.json
-├── docker-compose.yml
-├── scripts
-│   └── bootstrap-ubuntu.sh
-└── provisioning
-    └── grafana
-        ├── dashboards
-        │   └── dashboards.yml
-        └── datasources
-            └── prometheus.yml
-```
-
 ## Setup Commands
 
 ```bash
