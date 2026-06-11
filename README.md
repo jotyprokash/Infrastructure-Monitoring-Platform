@@ -15,6 +15,8 @@
 
 Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and public endpoint checks.
 
+![Hybrid Infrastructure Monitoring Platform](assets/architecture/monitoring-platform.png)
+
 ## Repository Tree
 
 ```text
@@ -23,6 +25,9 @@ Self-hosted observability stack for Proxmox VE, LXC, VMs, Docker workloads, and 
 ├── .gitignore
 ├── Makefile
 ├── README.md
+├── assets
+│   └── architecture
+│       └── monitoring-platform.png
 ├── configs
 │   ├── alertmanager
 │   │   └── alertmanager.yml
